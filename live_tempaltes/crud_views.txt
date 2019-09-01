@@ -1,0 +1,35 @@
+#//$MODEL_LC$=lowercaseAndDash(MODEL)
+#//$MODEL_UNDER$=snakeCase(MODEL)
+
+class $MODEL$CreateView(LoginRequiredMixin, CreateView):
+    model = $MODEL$
+    form_class = $MODEL$Form
+    success_url = reverse_lazy('$NAMESPACE$:list-$MODEL_LC$')
+
+$MODEL_UNDER$_create_view = $MODEL$CreateView.as_view()
+
+class $MODEL$UpdateView(LoginRequiredMixin, UpdateView):
+    model = $MODEL$
+    form_class = $MODEL$Form
+    success_url = reverse_lazy('$NAMESPACE$:list-$MODEL_LC$')
+
+$MODEL_UNDER$_update_view = $MODEL$UpdateView.as_view()
+
+class $MODEL$ListView(LoginRequiredMixin, ListView):
+    model = $MODEL$
+    context_object_name = '$MODEL_UNDER$_list'
+    paginate_by = 10
+
+$MODEL_UNDER$_list_view = $MODEL$ListView.as_view()
+
+class $MODEL$DeleteView(LoginRequiredMixin, DeleteView):
+    model = $MODEL$
+    success_url = reverse_lazy('$NAMESPACE$:list-$MODEL_LC$')
+
+$MODEL_UNDER$_delete_view = $MODEL$DeleteView.as_view()
+
+class $MODEL$DetailView(LoginRequiredMixin, DetailView):
+    model = $MODEL$
+
+$MODEL_UNDER$_detail_view = $MODEL$DetailView.as_view()
+

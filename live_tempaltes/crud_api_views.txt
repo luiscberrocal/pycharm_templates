@@ -1,0 +1,27 @@
+#//$MODEL_UNDER$=snakeCase(MODEL_NAME)
+
+from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView
+from .serializers import $MODEL_NAME$Serializer
+from ..models import $MODEL_NAME$
+
+class $MODEL_NAME$ListAPIView(ListAPIView):
+    serializer_class = $MODEL_NAME$Serializer
+
+    def get_queryset(self):
+        return $MODEL_NAME$.objects.all()
+
+$MODEL_UNDER$_list_api_view = $MODEL_NAME$ListAPIView.as_view()
+
+class $MODEL_NAME$DetailAPIView(RetrieveUpdateDestroyAPIView):
+    serializer_class = $MODEL_NAME$Serializer
+    queryset = $MODEL_NAME$.objects.all()
+
+    def get_object(self):
+        return super($MODEL_NAME$DetailAPIView, self).get_object()
+
+$MODEL_UNDER$_detail_api_view = $MODEL_NAME$DetailAPIView.as_view()
+
+class $MODEL_NAME$CreateAPIView(CreateAPIView):
+    serializer_class = $MODEL_NAME$Serializer
+
+$MODEL_UNDER$_create_api_view = $MODEL_NAME$CreateAPIView.as_view()

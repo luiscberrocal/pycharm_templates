@@ -1,0 +1,9 @@
+//$MODEL_LC$=lowercaseAndDash(MODEL)
+//$MODEL_UNDER$=snakeCase(MODEL)
+
+#$MODEL$ CRUD urls
+path(r'$MODEL_LC$/list/', $MODEL_UNDER$_list_view, name='list-$MODEL_LC$'),
+path(r'$MODEL_LC$/create/', $MODEL_UNDER$_create_view, name='create-$MODEL_LC$'),
+path(r'$MODEL_LC$/update/<int:pk>/', $MODEL_UNDER$_update_view, name='update-$MODEL_LC$'),
+path(r'$MODEL_LC$/delete/<int:pk>/', $MODEL_UNDER$_delete_view, name='delete-$MODEL_LC$'),
+path(r'$MODEL_LC$/<int:pk>/', $MODEL_UNDER$_detail_view, name='detail-$MODEL_LC$'),
