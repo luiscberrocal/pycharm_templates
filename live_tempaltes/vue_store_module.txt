@@ -1,0 +1,39 @@
+const state = {
+  $LIST_VARIABLE$: [],
+}
+const getters = {
+  $LIST_VARIABLE$: state => {
+    return state.$LIST_VARIABLE$;
+
+  },
+}
+const mutations = {
+  set$LIST_VARIABLE$(state, $LIST_VARIABLE$) {
+    state.$LIST_VARIABLE$ = $LIST_VARIABLE$;
+  },
+}
+
+const actions = {
+  get$LIST_VARIABLE$({commit, getters}, $PAYLOAD_VAR$) {
+    const JWTToken = getters.jwt;
+    const headers = {headers: {"Authorization": `Bearer ${JWTToken}`}}
+    const url = `/change/api/url/${$PAYLOAD_VAR$}`;
+    axios.get(url, headers)
+      .then((response) => {
+        console.log(response.data);
+        commit('set$LIST_VARIABLE$', response.data);
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  },
+
+}
+
+export default {
+  state,
+  mutations,
+  actions,
+  getters
+}
+

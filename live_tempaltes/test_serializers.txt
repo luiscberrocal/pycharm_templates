@@ -1,0 +1,42 @@
+class Test$MODEL$Serializer(TestCase):
+
+    def test_expected_fields(self):
+        $MODEL_LOWER$ = $MODEL$Factory.create()
+        serializer = $MODEL$Serializer(instance=$MODEL_LOWER$)
+        $MODEL_LOWER$_data = serializer.data
+        $MODEL_LOWER$_data_keys = ['id'] #Fixme Poner el resto de los campos del modelo
+        self.assertEqual(set($MODEL_LOWER$_data.keys()), set($MODEL_LOWER$_data_keys))
+
+    def test_creation(self):
+        $MODEL_LOWER$ = $MODEL$Factory.create()
+
+        $MODEL_LOWER$_dict = model_to_dict($MODEL_LOWER$)
+        $MODEL_LOWER$.delete()
+        $MODEL_LOWER$_dict.pop('id')
+
+        serializer = $MODEL$Serializer(data=$MODEL_LOWER$_dict)
+        self.assertTrue(serializer.is_valid())
+        serializer.save()
+        self.assertEqual($MODEL$.objects.count(), 1)
+
+    def test_update_$UPDATE_VAR$(self):
+        $MODEL_LOWER$ = $MODEL$Factory.create($UPDATE_VAR$='OLD $UPDATE_VAR$')
+
+        $MODEL_LOWER$_dict = model_to_dict($MODEL_LOWER$)
+
+        $MODEL_LOWER$_dict['$UPDATE_VAR$'] = 'NEW $UPDATE_VAR$'
+
+        serializer = $MODEL$Serializer(data=$MODEL_LOWER$_dict, instance=$MODEL_LOWER$)
+        self.assertTrue(serializer.is_valid())
+        serializer.save()
+        self.assertEqual($MODEL$.objects.filter($UPDATE_VAR$='NEW $UPDATE_VAR$').count(), 1)
+
+    def test_serialize_many(self):
+        $MODEL$Factory.create_batch(10)
+        $MODEL_LOWER$s = $MODEL$.objects.all()
+        serializer = $MODEL$Serializer($MODEL_LOWER$s, many=True)
+
+        $MODEL_LOWER$_data = serializer.data
+
+        #write_assertions($MODEL_LOWER$_data, '$MODEL_LOWER$_data', type_only=True)
+        self.fail('Not implemented')
